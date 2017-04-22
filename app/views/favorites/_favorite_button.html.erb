@@ -1,0 +1,11 @@
+<% if current_user.favoriting?(micropost) %>
+  <%= form_for(current_user.favorites.find_by(content_id: micropost.id), html: { method: :delete }) do |f| %>
+    <%= hidden_field_tag :content_id, micropost.id %>
+    <%= f.submit '-Favorite', class: 'btn btn-default btn-xs' %>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.favorites.build) do |f| %>
+    <%= hidden_field_tag :content_id, micropost.id %>
+    <%= f.submit '+Favorite', class: 'btn btn-success btn-xs' %>
+  <% end %>
+<% end %>
